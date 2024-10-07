@@ -19,15 +19,16 @@ const DataEntrySchema = mongoose.Schema({
     reg:{
             type:String
         },
-    school: {
+    level: {
+            type: String
+        },
+    gender: {
             type: String
         },
     age:{
         type:String
     },
-    level: {
-        type: String
-    },
+   
     comment: {
         type: String
     }

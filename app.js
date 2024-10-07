@@ -93,16 +93,16 @@ const formDataString = req.body
 
 
     const data = new Field({
-        fname: parsedObject.fname,
-        lname: parsedObject.lname,
-        dob: parsedObject.dob,
-        dept: parsedObject.dept,
-        level: parsedObject.level,
-        email: parsedObject.email,
-        school: parsedObject.school,
-        age: parsedObject.age,
-        reg: parsedObject.reg,
-        comment: parsedObject.comment
+        fname: parsedObject.FName,
+        lname: parsedObject.LName,
+        dob: parsedObject.DOB,
+        dept: parsedObject.Dept,
+        level: parsedObject.Level,
+        email: parsedObject.Email,
+        gender: parsedObject.Gender,
+        age: parsedObject.Age,
+        reg: parsedObject.Reg,
+        comment: parsedObject.Comment
     
      })
     
