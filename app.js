@@ -56,6 +56,37 @@ app.post("/", async (req, res, next) => {
 
 const formDataString = req.body
 
+
+
+
+    // Split the string into key-value pairs
+    const keyValuePairs = formDataString.split('&');
+
+    // Create an empty object to store the parsed data
+    const parsedObject = {};
+  
+    // Loop through each key-value pair
+    for (const pair of keyValuePairs) {
+      // Split the pair into key and value, handling spaces around the equal sign
+      const [key, value] = pair.split(/=(.+)/);
+  
+      // Decode the value to handle potential URL encoding
+      const decodedValue = decodeURIComponent(value);
+  
+      // Assign the decoded value to the key in the object
+      parsedObject[key] = decodedValue;
+    }
+      
+      console.log(parsedObject)
+
+     return res.status(200).send({
+      success: true,
+      result: parsedObject,
+      String: formDataString
+     })
+  
+  
+
  try{
 
     fetch(
@@ -70,28 +101,7 @@ const formDataString = req.body
       )
 
 
-      // Split the string into key-value pairs
-  const keyValuePairs = formDataString.split('&');
-
-  // Create an empty object to store the parsed data
-  const parsedObject = {};
-
-  // Loop through each key-value pair
-  for (const pair of keyValuePairs) {
-    // Split the pair into key and value, handling spaces around the equal sign
-    const [key, value] = pair.split(/=(.+)/);
-
-    // Decode the value to handle potential URL encoding
-    const decodedValue = decodeURIComponent(value);
-
-    // Assign the decoded value to the key in the object
-    parsedObject[key] = decodedValue;
-  }
-    
-    console.log(parsedObject)
-
-
-
+  
     const data = new Field({
         fname: parsedObject.FName,
         lname: parsedObject.LName,
@@ -111,10 +121,7 @@ const formDataString = req.body
         result : data
      })
  }catch(error){
-    return res.status(501).send({
-        success: false,
-        error: error
-    })
+   next(error)
  }
 
 
