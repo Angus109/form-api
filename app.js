@@ -81,7 +81,7 @@ function stringToObject(queryString) {
   return parsedObject;
 }
 
-const parsedObject = stringToObject(formDataString)
+const { parsedObject } = stringToObject(formDataString)
 
 if(!parsedObject.FName){
   return res.status(401).send({
