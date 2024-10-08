@@ -43,7 +43,7 @@ mongoose.connect(
 
 app.use(cookieParser());
 
-app.use("/test", async (req, res, next)=>{
+app.post("/test", async (req, res, next)=>{
    return res.status(200).send({
     success: true,
     message: "endpoint is ready for test"
@@ -52,7 +52,7 @@ app.use("/test", async (req, res, next)=>{
 
 
 
-app.use("/form", async (req, res, next) => {
+app.post("/form", async (req, res, next) => {
 
 const formDataString = req.body.formData
 
