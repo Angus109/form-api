@@ -81,10 +81,73 @@ function stringToObject(queryString) {
   return parsedObject;
 }
 
-console.log(stringToObject(formDataString))
+const parsedObject = stringToObject(formDataString)
 
+if(!parsedObject.FName){
+  return res.status(401).send({
+    success: false,
+    message: "FName is required"
+  })
+}
 
-  
+if(!parsedObject.LName){
+  return res.status(401).send({
+    success: false,
+    message: "LName is required"
+  })
+}
+
+if(!parsedObject.Email){
+  return res.status(401).send({
+    success: false,
+    message: "Email is required"
+  })
+}
+
+if(!parsedObject.DOB){
+  return res.status(401).send({
+    success: false,
+    message: "DOB is required"
+  })
+}
+if(!parsedObject.Dept){
+  return res.status(401).send({
+    success: false,
+    message: "Dept is required"
+  })
+}
+if(!parsedObject.Level){
+  return res.status(401).send({
+    success: false,
+    message: "Level is required"
+  })
+}
+if(!parsedObject.Gender){
+  return res.status(401).send({
+    success: false,
+    message: "Gender is required"
+  })
+}
+if(!parsedObject.Age){
+  return res.status(401).send({
+    success: false,
+    message: "Age is required"
+  })
+}
+
+if(!parsedObject.Reg){
+  return res.status(401).send({
+    success: false,
+    message: "Reg is required"
+  })
+}
+
+if(!parsedObject.Comment){
+  return res.status(401).send({
+    success: false,
+    message: "comment is required"
+  })
+}
 
  try{
 
@@ -99,7 +162,7 @@ console.log(stringToObject(formDataString))
         }
       )
 
-      const parsedObject = stringToObject(formDataString)
+    
 
 
   
