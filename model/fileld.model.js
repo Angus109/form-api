@@ -38,6 +38,6 @@ const DataEntrySchema = mongoose.Schema({
 { timestamps: true }
 );
 
-const field =    mongoose.model("DataEntry", DataEntrySchema);
-module.exports =field
+const Form = mongoose.model("DataEntry", DataEntrySchema);
+module.exports = Form
 

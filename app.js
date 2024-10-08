@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const Field = require("./model/fileld.model")
+const Form = require("./model/fileld.model")
 const dotenv = require("dotenv")
 
 dotenv.config({ path: ".env" });
@@ -52,9 +52,9 @@ app.use("/test", async (req, res, next)=>{
 
 
 
-app.post("/", async (req, res, next) => {
+app.use("/form", async (req, res, next) => {
 
-const formDataString = req.body
+const formDataString = req.body.formData
 
 
 function stringToObject(queryString) {
@@ -166,7 +166,7 @@ if(!parsedObject.Comment){
 
 
   
-    const data = new Field({
+    const data = new Form({
         fname: parsedObject.FName,
         lname: parsedObject.LName,
         dob: parsedObject.DOB,
