@@ -54,100 +54,34 @@ app.post("/test", async (req, res, next)=>{
 
 app.post("/form", async (req, res, next) => {
 
-const formDataString = req.body.formData
+const {formDataString, formDataObject} = req.body
 
 
-function stringToObject(queryString) {
+// function stringToObject(queryString) {
 
-  // Split the string into key-value pairs
-  const keyValuePairs = queryString.split('&');
+//   // Split the string into key-value pairs
+//   const keyValuePairs = queryString.split('&');
 
-  // Create an empty object to store the parsed data
-  const parsedObject = {};
+//   // Create an empty object to store the parsed data
+//   const parsedObject = {};
 
-  // Loop through each key-value pair
-  for (const pair of keyValuePairs) {
-    // Split the pair into key and value, handling spaces around the equal sign
-    const [key, value] = pair.split(/=(.+)/);
+//   // Loop through each key-value pair
+//   for (const pair of keyValuePairs) {
+//     // Split the pair into key and value, handling spaces around the equal sign
+//     const [key, value] = pair.split(/=(.+)/);
 
-    // Decode the value to handle potential URL encoding
-    const decodedValue = decodeURIComponent(value);
+//     // Decode the value to handle potential URL encoding
+//     const decodedValue = decodeURIComponent(value);
 
-    // Assign the decoded value to the key in the object
-    parsedObject[key] = decodedValue;
-  }
+//     // Assign the decoded value to the key in the object
+//     parsedObject[key] = decodedValue;
+//   }
 
-  // Return the parsed object
-  return parsedObject;
-}
+//   // Return the parsed object
+//   return parsedObject;
+// }
 
-const { parsedObject } = stringToObject(formDataString)
 
-if(!parsedObject.FName){
-  return res.status(401).send({
-    success: false,
-    message: "FName is required"
-  })
-}
-
-if(!parsedObject.LName){
-  return res.status(401).send({
-    success: false,
-    message: "LName is required"
-  })
-}
-
-if(!parsedObject.Email){
-  return res.status(401).send({
-    success: false,
-    message: "Email is required"
-  })
-}
-
-if(!parsedObject.DOB){
-  return res.status(401).send({
-    success: false,
-    message: "DOB is required"
-  })
-}
-if(!parsedObject.Dept){
-  return res.status(401).send({
-    success: false,
-    message: "Dept is required"
-  })
-}
-if(!parsedObject.Level){
-  return res.status(401).send({
-    success: false,
-    message: "Level is required"
-  })
-}
-if(!parsedObject.Gender){
-  return res.status(401).send({
-    success: false,
-    message: "Gender is required"
-  })
-}
-if(!parsedObject.Age){
-  return res.status(401).send({
-    success: false,
-    message: "Age is required"
-  })
-}
-
-if(!parsedObject.Reg){
-  return res.status(401).send({
-    success: false,
-    message: "Reg is required"
-  })
-}
-
-if(!parsedObject.Comment){
-  return res.status(401).send({
-    success: false,
-    message: "comment is required"
-  })
-}
 
  try{
 
@@ -167,16 +101,16 @@ if(!parsedObject.Comment){
 
   
     const data = new Form({
-        fname: parsedObject.FName,
-        lname: parsedObject.LName,
-        dob: parsedObject.DOB,
-        dept: parsedObject.Dept,
-        level: parsedObject.Level,
-        email: parsedObject.Email,
-        gender: parsedObject.Gender,
-        age: parsedObject.Age,
-        reg: parsedObject.Reg,
-        comment: parsedObject.Comment
+        fname: formDataObject.FName,
+        lname: formDataObject.LName,
+        dob: formDataObject.DOB,
+        dept: formDataObject.Dept,
+        level: formDataObject.Level,
+        email: formDataObject.Email,
+        gender: formDataObject.Gender,
+        age: formDataObject.Age,
+        reg: formDataObject.Reg,
+        comment: formDataObject.Comment
     
      })
     
