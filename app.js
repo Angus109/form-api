@@ -57,29 +57,20 @@ app.post("/form", async (req, res, next) => {
 const {formDataString, formDataObject} = req.body
 
 
-// function stringToObject(queryString) {
+if(!formDataString || !formDataObject){
+  return res.status(403).send({
+    success: false,
+    message:"formDataString, fomDatObject is required"
+  })
+}
 
-//   // Split the string into key-value pairs
-//   const keyValuePairs = queryString.split('&');
+if(!formDataObject.FName || !formDataObject.LName || !formDataObject.Email){
+  return res.status(403).send({
+    success: false,
+    message:"FName, LName , Email is required"
+  })
+}
 
-//   // Create an empty object to store the parsed data
-//   const parsedObject = {};
-
-//   // Loop through each key-value pair
-//   for (const pair of keyValuePairs) {
-//     // Split the pair into key and value, handling spaces around the equal sign
-//     const [key, value] = pair.split(/=(.+)/);
-
-//     // Decode the value to handle potential URL encoding
-//     const decodedValue = decodeURIComponent(value);
-
-//     // Assign the decoded value to the key in the object
-//     parsedObject[key] = decodedValue;
-//   }
-
-//   // Return the parsed object
-//   return parsedObject;
-// }
 
 
 
@@ -103,20 +94,21 @@ const {formDataString, formDataObject} = req.body
     const data = new Form({
         fname: formDataObject.FName,
         lname: formDataObject.LName,
-        dob: formDataObject.DOB,
-        dept: formDataObject.Dept,
-        level: formDataObject.Level,
-        email: formDataObject.Email,
-        gender: formDataObject.Gender,
-        age: formDataObject.Age,
-        reg: formDataObject.Reg,
-        comment: formDataObject.Comment
+        dob: formDataObject.DOB || "",
+        dept: formDataObject.Dept || "",
+        level: formDataObject.Level || "",
+        email: formDataObject.Email ,
+        gender: formDataObject.Gender || "",
+        age: formDataObject.Age || "",
+        reg: formDataObject.Reg || "",
+        comment: formDataObject.Comment || ""
     
      })
+     const result = await data.save()
     
     return res.status(200).send({
         success: true,
-        result : data
+        result : result
      })
  }catch(error){
    next(error)
