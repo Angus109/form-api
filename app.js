@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const Form = require("./model/fileld.model")
+const Form = require("./model/field.model")
 const dotenv = require("dotenv")
 
 dotenv.config({ path: ".env" });
@@ -85,13 +85,12 @@ if(!formDataObject.FName || !formDataObject.LName || !formDataObject.Email){
             "Content-Type": "text/plain;charset=utf-8",
           },
         }
-      )
+      );
 
     
 
-
   
-    const data = new Form({
+    const data = new Form ({
         fname: formDataObject.FName,
         lname: formDataObject.LName,
         dob: formDataObject.DOB || "",
@@ -104,14 +103,17 @@ if(!formDataObject.FName || !formDataObject.LName || !formDataObject.Email){
         comment: formDataObject.Comment || ""
     
      })
-     const result = await data.save()
+    const result = await data.save()
     
-    return res.status(200).send({
+    res.json({
         success: true,
         result : result
      })
  }catch(error){
-   next(error)
+   res.status(500).send({
+    success: false,
+    error: error
+   })
  }
 
 
