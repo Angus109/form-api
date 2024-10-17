@@ -20,29 +20,22 @@ app.use(
   })
 );
 app.use(express.json());
-
-
-const DB = process.env.DB_URL
-const PORT = process.env.PORT || 3000;
-
-mongoose.connect(
-  DB,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("connected to DB");
-
-    app.listen(PORT, () => {
-      console.log("listening on port 4000");
-    });
-  }
-);
-
-
-
 app.use(cookieParser());
+
+
+
+const PORT = process.env.PORT ;
+
+mongoose.connect(process.env.DATABASE_URL)
+.then(()=>console.log('connection established'))
+.catch(()=>console.log('Failed to establish connection'))
+
+
+
+
+app.listen(PORT, ()=>console.log(`Listening to port ${PORT}`))
+
+
 
 app.post("/test", async (req, res, next)=>{
    return res.status(200).send({
@@ -77,8 +70,20 @@ if(!formDataObject.FName || !formDataObject.LName  || !formDataObject.DOB || !fo
 
  try{
 
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbwmSHRQLk9RcHI0yrv2HqO83vcvanYbMMbz51ENL12YxDg2o4Lyw70LFVE_0xxWVxlP6A/exec",
+    {
+      method: "POST",
+      body: formDataString,
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+    }
+  );
+
   
-    const data = new  FormModel ({
+    const data = new FormModel({
         fname: formDataObject.FName,
         lname: formDataObject.LName,
         dob: formDataObject.DOB || "",
@@ -94,16 +99,7 @@ if(!formDataObject.FName || !formDataObject.LName  || !formDataObject.DOB || !fo
     const result = await data.save()
 
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbwmSHRQLk9RcHI0yrv2HqO83vcvanYbMMbz51ENL12YxDg2o4Lyw70LFVE_0xxWVxlP6A/exec",
-      {
-        method: "POST",
-        body: formDataString,
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-      }
-    );
+ 
     
     res.json({
         success: true,

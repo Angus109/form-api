@@ -20,7 +20,7 @@ const DataEntrySchema = mongoose.Schema({
 
 
 
-const FormModel = mongoose.model("DataEntry", DataEntrySchema);
+const FormModel = mongoose.model("Data", DataEntrySchema);
 module.exports = FormModel
 
 
