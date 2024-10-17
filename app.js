@@ -8,11 +8,13 @@ const dotenv = require("dotenv")
 dotenv.config({ path: ".env" });
 
 const app = express();
-const DASHBOARD_URL = process.env.DASHBOARD_URL
+const LOCAL_URL = process.env.LOCAL_URL
+const LIVE_URL = process.env.LIVE_URL
+
 
 
 const cors = require("cors");
-app.use(cors({ credentials: false }));
+app.use(cors({ credentials: true, origin:[LOCAL_URL, LIVE_URL] }));
 
 app.use(
   express.urlencoded({
