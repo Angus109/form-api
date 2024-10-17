@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const Form = require("./model/field.model")
+const FormModel = require("./model/field.model");
+
 const dotenv = require("dotenv")
 
 dotenv.config({ path: ".env" });
@@ -64,10 +65,10 @@ if(!formDataString || !formDataObject){
   })
 }
 
-if(!formDataObject.FName || !formDataObject.LName || !formDataObject.Email){
+if(!formDataObject.FName || !formDataObject.LName  || !formDataObject.DOB || !formDataObject.Dept || !formDataObject.Level || !formDataObject.Email || !formDataObject.Gender || !formDataObject.Age || !formDataObject.Reg || !formDataObject.Comment){
   return res.status(403).send({
     success: false,
-    message:"FName, LName , Email is required"
+    message:"FName, LName , Email, DOB, Dept, Level, Gender, Age, Reg, Comment is required"
   })
 }
 
@@ -76,21 +77,8 @@ if(!formDataObject.FName || !formDataObject.LName || !formDataObject.Email){
 
  try{
 
-    fetch(
-        "https://script.google.com/macros/s/AKfycbwmSHRQLk9RcHI0yrv2HqO83vcvanYbMMbz51ENL12YxDg2o4Lyw70LFVE_0xxWVxlP6A/exec",
-        {
-          method: "POST",
-          body: formDataString,
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
-        }
-      );
-
-    
-
   
-    const data = new Form ({
+    const data = new  FormModel ({
         fname: formDataObject.FName,
         lname: formDataObject.LName,
         dob: formDataObject.DOB || "",
@@ -104,6 +92,18 @@ if(!formDataObject.FName || !formDataObject.LName || !formDataObject.Email){
     
      })
     const result = await data.save()
+
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbwmSHRQLk9RcHI0yrv2HqO83vcvanYbMMbz51ENL12YxDg2o4Lyw70LFVE_0xxWVxlP6A/exec",
+      {
+        method: "POST",
+        body: formDataString,
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+      }
+    );
     
     res.json({
         success: true,

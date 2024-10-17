@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+
+
 const DataEntrySchema = mongoose.Schema({
     fname: String,
     lname: String,
@@ -16,6 +18,9 @@ const DataEntrySchema = mongoose.Schema({
 { timestamps: true }
 );
 
-const Form = mongoose.model("DataEntry", DataEntrySchema);
-module.exports = Form
+
+
+const FormModel = mongoose.model("DataEntry", DataEntrySchema);
+module.exports = FormModel
+
 
